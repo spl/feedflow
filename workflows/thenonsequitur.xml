@@ -1,7 +1,9 @@
+name: Email new posts from The Non Sequitur
+
 on:
   rss:
-    url:
-      - https://thenonsequitur.com/?feed=rss2
+    url: https://thenonsequitur.com/?feed=rss2
+
 jobs:
   email:
     - name: Email
@@ -12,11 +14,10 @@ jobs:
         username: ${{secrets.MAIL_USERNAME}}
         password: ${{secrets.MAIL_PASSWORD}}
         subject: ${{on.rss.outputs.title}}
-        # Literal body:
         body: |
           ${{on.rss.outputs.link}}
           <br><br>
           ${{on.rss.outputs.content}}
         to: sean.leather+feedflow@gmail.com
-        from: The Non Sequitur
+        from: The Non Sequitur <${{secrets.MAIL_USERNAME}}@gmail.com>
         content_type: text/html
