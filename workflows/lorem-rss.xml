@@ -1,0 +1,23 @@
+name: Email new posts from Lorem RSS for testing
+
+on:
+  rss:
+    url: https://lorem-rss.herokuapp.com/feed?unit=minute&interval=10
+
+jobs:
+  email:
+    - name: Email
+      uses: dawidd6/action-send-mail@v2
+      with:
+        server_address: smtp.gmail.com
+        server_port: 465
+        username: ${{secrets.MAIL_USERNAME}}
+        password: ${{secrets.MAIL_PASSWORD}}
+        subject: ${{on.rss.outputs.title}}
+        body: |
+          ${{on.rss.outputs.link}}
+          <br><br>
+          ${{on.rss.outputs.content}}
+        to: sean.leather+feedflow@gmail.com
+        from: The Non Sequitur <${{secrets.MAIL_USERNAME}}@gmail.com>
+        content_type: text/html
