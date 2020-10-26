@@ -6,18 +6,21 @@ on:
 
 jobs:
   email:
-    - name: Email
-      uses: dawidd6/action-send-mail@v2
-      with:
-        server_address: smtp.gmail.com
-        server_port: 465
-        username: ${{secrets.MAIL_USERNAME}}
-        password: ${{secrets.MAIL_PASSWORD}}
-        subject: ${{on.rss.outputs.title}}
-        body: |
-          ${{on.rss.outputs.link}}
-          <br><br>
-          ${{on.rss.outputs.content}}
-        to: sean.leather+feedflow@gmail.com
-        from: The Non Sequitur <${{secrets.MAIL_USERNAME}}@gmail.com>
-        content_type: text/html
+    name: Send email
+    runs-on: ubuntu-latest
+    steps:
+      - name: Email
+        uses: dawidd6/action-send-mail@v2
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
+          subject: ${{on.rss.outputs.title}}
+          body: |
+            ${{on.rss.outputs.link}}
+            <br><br>
+            ${{on.rss.outputs.content}}
+          to: sean.leather+feedflow@gmail.com
+          from: The Non Sequitur <${{secrets.MAIL_USERNAME}}@gmail.com>
+          content_type: text/html
