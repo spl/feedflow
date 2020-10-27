@@ -14,9 +14,7 @@ jobs:
           url: ${{on.rss.outputs.link}}
         # https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-commands-for-github-actions#setting-an-environment-variable
         run: |
-          echo 'content<<EOF' >> $GITHUB_ENV
-          curl "$url" | npx readability "$url" >> $GITHUB_ENV
-          echo 'EOF' >> $GITHUB_ENV
+          curl "$url" | npx readability "$url"
       - name: Email
         uses: dawidd6/action-send-mail@v2
         with:
@@ -29,8 +27,6 @@ jobs:
             ${{on.rss.outputs.link}}
             <br><br>
             ${{on.rss.outputs.content}}
-            <br><br>
-            ${{env.content}}
           to: sean.leather+feedflow@gmail.com
           from: The Non Sequitur <${{secrets.MAIL_USERNAME}}@gmail.com>
           content_type: text/html
