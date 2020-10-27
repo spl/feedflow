@@ -14,6 +14,8 @@ jobs:
           url: ${{on.rss.outputs.link}}
         # https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-commands-for-github-actions#setting-an-environment-variable
         run: |
+          apt-get install curl
+          npm install mozilla-readability-cli
           curl "$url" | npx readability "$url"
       - name: Email
         uses: dawidd6/action-send-mail@v2
