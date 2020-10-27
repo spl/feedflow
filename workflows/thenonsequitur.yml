@@ -9,14 +9,16 @@ jobs:
     name: Send email
     runs-on: ubuntu-latest
     steps:
+      - name: Install curl and readability
+        run: |
+          apt update && apt install curl
+          npm install -g mozilla-readability-cli
       - name: Fetch full content
         env:
           url: ${{on.rss.outputs.link}}
         # https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-commands-for-github-actions#setting-an-environment-variable
         run: |
-          apt-get install curl
-          npm install mozilla-readability-cli
-          curl "$url" | npx readability "$url"
+          curl "$url" | readability "$url"
       - name: Email
         uses: dawidd6/action-send-mail@v2
         with:
