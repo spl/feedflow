@@ -20,4 +20,4 @@ jobs:
       - name: Setup act
         uses: actionsflow/setup-act-for-actionsflow@v1
       - name: Run act
-        run: act --workflows ./dist/workflows --secret-file ./dist/.secrets --eventpath ./dist/event.json --env-file ./dist/.env
+        run: act --verbose --workflows ./dist/workflows --secret-file ./dist/.secrets --eventpath ./dist/event.json --env-file ./dist/.env
