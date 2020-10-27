@@ -1,4 +1,4 @@
-name: Actionsflow
+name: Run Actionsflow
 on:
   repository_dispatch:
   workflow_dispatch:
@@ -7,11 +7,11 @@ on:
   push:
 jobs:
   run:
-    runs-on: ubuntu-latest
     name: Run
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Run Actionsflow
+      - name: actionsflow build
         uses: actionsflow/actionsflow-action@v1
         with:
           args: build

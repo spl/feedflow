@@ -1,25 +1,25 @@
-name: Update All Dependencies
+name: Update dependencies
 on:
   workflow_dispatch:
 jobs:
   update:
+    name: Run
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Checkout Branch
-        run: git checkout main
-      - name: Configure CI Git User
+      - run: git checkout main
+      - name: Configure git user
         run: |
-          git config user.name github-actions[bot]
-          git config user.email github-actions[bot]@users.noreply.github.com
-      - name: Update
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+      - name: npm update
         run: |
           npm ci
           npm update
-      - name: Git Push
+      - name: git push
         run: |
           git add package.json package-lock.json
-          git commit -m "chore: update dependencies"
+          git commit --message="Update dependencies"
           git push
