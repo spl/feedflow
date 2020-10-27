@@ -3,6 +3,8 @@ name: Email new posts from The NYTimes Stone
 on:
   rss:
     url: https://www.nytimes.com/svc/collections/v1/publish/www.nytimes.com/column/the-stone/rss.xml
+    config:
+      active: false
 
 jobs:
   email:
