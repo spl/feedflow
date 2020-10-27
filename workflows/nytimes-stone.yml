@@ -30,7 +30,7 @@ jobs:
             <br><br>
             ${{on.rss.outputs.content}}
             <br><br>
-            ${{content}}
+            ${{env.content}}
           to: sean.leather+feedflow@gmail.com
           from: NYTimes Stone <${{secrets.MAIL_USERNAME}}@gmail.com>
           content_type: text/html
