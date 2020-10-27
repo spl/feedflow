@@ -1,0 +1,20 @@
+name: Print new posts from Lorem RSS for debugging
+
+on:
+  rss:
+    url: https://lorem-rss.herokuapp.com/feed?unit=minute&interval=10
+
+jobs:
+  print:
+    name: Print for debugging
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Outputs
+        env:
+          title: ${{on.rss.outputs.title}}
+          contentSnippet: ${{on.rss.outputs.contentSnippet}}
+          link: ${{on.rss.outputs.link}}
+        run: |
+          echo title: $title
+          echo contentSnippet: $contentSnippet
+          echo link: $link
